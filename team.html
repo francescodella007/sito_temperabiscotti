@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tempera Biscotti - Il Team</title>
+    <link rel="icon" href="img/favicon.png">
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* Assicura che le immagini sulle card principali si vedano */
+        .member-card img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 8px;
+        }
+
+        /* Layout a due colonne per la finestra modale */
+        .team-modal {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            max-width: 650px !important; /* Leggermente più larga per farci stare tutto */
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Colonna di SINISTRA */
+        .modal-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 2px dashed rgba(255, 255, 255, 0.2); /* Linea divisoria */
+            padding-right: 25px;
+        }
+
+        .modal-left img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border: 3px solid #ff00ff; /* Bordo magenta */
+            border-radius: 8px;
+            margin-bottom: 15px;
+            image-rendering: pixelated;
+        }
+
+        .modal-role {
+            color: #ffd700;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .modal-age {
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+
+        /* Colonna di DESTRA */
+        .modal-right {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-right h3 {
+            color: #ff00ff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .modal-right p {
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Responsive: Su telefono diventa a colonna singola */
+        @media (max-width: 768px) {
+            .team-modal {
+                flex-direction: column;
+                align-items: center;
+            }
+            .modal-left {
+                border-right: none;
+                border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+                padding-right: 0;
+                padding-bottom: 20px;
+                width: 100%;
+            }
+            .modal-right {
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-mirror-bg">
+        <div class="space-panel"></div>
+        <div class="space-panel flipped"></div>
+        <div class="space-panel"></div>
+        <div class="space-panel flipped"></div>
+    </div>
+
+    <header class="main_menu">
+        <div class="container-fluid px-5">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0 w-100">
+                <a href="index.html" class="brand-home" title="Torna alla Home">
+                    <img src="img/logo.png" alt="Tempera Biscotti Logo Home">
+                </a>
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="modalita.html">Modalità</a></li>
+                        <li class="nav-item"><a class="nav-link" href="armadietto.html">Armadietto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="team.html" style="color: #ffd700 !important;">Team</a></li>
+                    </ul>
+                </div>
+
+                <div style="width: 250px;" class="d-none d-lg-block"></div>
+                <div class="d-none d-lg-flex justify-content-end align-items-center text-end" style="width: 250px;">
+                    <a href="#" class="btn-download-navbar" onclick="event.preventDefault();">
+                        <span>🎮</span> DOWNLOAD
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="team-section container">
+        <h1 class="team-title-page">SQUADRA DI DIFESA</h1>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="member-card" onclick="openMember('Morgan Maselli', 'Lead Developer', '28', 'Ha curato l\'intero sistema di puntamento e la logica delle ondate aliene.', 'img/team_morgan.jpg')">
+                    <img src="img/team_morgan.jpg" alt="">
+                    <h2>Morgan<br>Maselli</h2>
+                    <span>Lead Dev</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="member-card" onclick="openMember('Davide Beolchi', 'Game Artist', '26', 'Creatore delle nebulose viola e di ogni singolo pixel.', 'img/team_dev.jpg')">
+                    <img src="img/team_dev.jpg" alt="">
+                    <h2>Davide<br>Beolchi</h2>
+                    <span>Artist</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="member-card" onclick="openMember('Francesco Dell aquila', 'Sound Designer', '25', 'Ha composto la colonna sonora 8-bit.', 'img/team_checco.jpg')">
+                    <img src="img/team_checco.jpg" alt="">
+                    <h2>Francesco<br>Dell'aquila</h2>
+                    <span>Sound Design</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="member-card" onclick="openMember('Stefano Nicastro', 'UI/UX Designer', '27', 'Responsabile dell\'interfaccia utente e di questo sito.', 'img/team_nik.jpg')">
+                    <img src="img/team_nik.jpg" alt="">
+                    <h2>Stefano<br>Nicastro</h2>
+                    <span>UI Designer</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="memberOverlay" class="modal-overlay" onclick="closeMember()">
+        <div class="modal-window team-modal" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="closeMember()">&times;</span>
+            
+            <div class="modal-left">
+                <img id="modalImg" src="" alt="Foto Membro">
+                <span id="modalRole" class="modal-role">RUOLO</span>
+                <span id="modalAge" class="modal-age">Età: X</span>
+            </div>
+            
+            <div class="modal-right">
+                <h3 id="modalName">NOME COGNOME</h3>
+                <p id="modalDesc">Descrizione...</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="sound/Max Gazzè - Sotto Casa (fixed frame video)_128k.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="audio-controls">
+        <button id="restartAudioBtn" class="audio-btn icon-only" onclick="restartAudio()" title="Ricomincia da capo">🔄</button>
+        <button id="audioToggleBtn" class="audio-btn" onclick="toggleAudio()">🔇 MUSIC: OFF</button>
+    </div>
+
+    <script>
+        // Funzione aggiornata con il parametro 'age'
+        function openMember(name, role, age, desc, img) {
+            document.getElementById('modalName').innerText = name;
+            document.getElementById('modalRole').innerText = role;
+            document.getElementById('modalAge').innerText = "Età: " + age; // Inserisce l'età
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalImg').src = img;
+            
+            document.getElementById('memberOverlay').style.display = 'flex';
+        }
+
+        function closeMember() {
+            document.getElementById('memberOverlay').style.display = 'none';
+        }
+
+        /* --- SCRIPT AUDIO SINCRONIZZATO --- */
+        var bgMusic = document.getElementById("bgMusic");
+        var audioBtn = document.getElementById("audioToggleBtn");
+        var isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+                audioBtn.innerHTML = "🔇 MUSIC: OFF";
+                audioBtn.classList.remove("playing");
+                sessionStorage.setItem("musicState", "paused");
+                sessionStorage.setItem("musicTime", bgMusic.currentTime); 
+            } else {
+                bgMusic.play();
+                audioBtn.innerHTML = "🔊 MUSIC: ON";
+                audioBtn.classList.add("playing");
+                sessionStorage.setItem("musicState", "playing");
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function restartAudio() {
+            bgMusic.currentTime = 0; 
+            sessionStorage.setItem("musicTime", "0");
+            if (!isPlaying) {
+                toggleAudio(); 
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var savedState = sessionStorage.getItem("musicState");
+            var savedTime = sessionStorage.getItem("musicTime");
+
+            if (savedTime !== null) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            if (savedState === "playing") {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    audioBtn.innerHTML = "🔊 MUSIC: ON";
+                    audioBtn.classList.add("playing");
+                }).catch((error) => {
+                    console.log("Autoplay bloccato. È necessario un clic dell'utente.");
+                    isPlaying = false;
+                    sessionStorage.setItem("musicState", "paused");
+                });
+            }
+        });
+
+        window.addEventListener("beforeunload", function() {
+            sessionStorage.setItem("musicTime", bgMusic.currentTime);
+        });
+    </script>
+</body>
+</html>

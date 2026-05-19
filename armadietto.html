@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tempera Biscotti - Armadietto</title>
+    <link rel="icon" href="img/favicon.png">
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* Forza il contenitore visivo ad allineare al centro la navicella */
+        .skin-visual {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-height: 200px; /* Garantisce l'altezza dello spazio */
+        }
+
+        /* Gestione della navicella grande e nitida */
+        .skin-visual img {
+            width: 150px !important; /* Ingrandisce significativamente la dimensione */
+            height: auto !important;
+            display: block !important;
+            margin: 0 auto !important; /* Centratura orizzontale */
+            image-rendering: pixelated; /* Evita l'effetto sfocato dell'ingrandimento del browser */
+            animation: floatShip 3s ease-in-out infinite; /* Effetto gravità zero */
+        }
+
+        /* Animazione per far fluttuare la navicella nello spazio */
+        @keyframes floatShip {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="space-mirror-bg">
+        <div class="space-panel"></div>
+        <div class="space-panel flipped"></div>
+        <div class="space-panel"></div>
+        <div class="space-panel flipped"></div>
+    </div>
+
+    <header class="main_menu">
+        <div class="container-fluid px-5">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0 w-100">
+                <a href="index.html" class="brand-home" title="Torna alla Home">
+                    <img src="img/logo.png" alt="Tempera Biscotti Logo Home">
+                </a>
+                
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="modalita.html">Modalità</a></li>
+                        <li class="nav-item"><a class="nav-link" href="armadietto.html" style="color: #ffd700 !important;">Armadietto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+                    </ul>
+                </div>
+
+                <div style="width: 250px;" class="d-none d-lg-block"></div>
+                <div class="d-none d-lg-flex justify-content-end align-items-center text-end" style="width: 250px;">
+                    <a href="#" class="btn-download-navbar" onclick="event.preventDefault();">
+                        <span>🎮</span> DOWNLOAD
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="armadietto-container container">
+        
+        <h1 class="armadietto-title-page">ARMADIETTO</h1>
+        
+        <p class="lore-text">
+            Completa gli obiettivi galattici per guadagnare prestigiose <strong>STELLE</strong>.<br> 
+            In futuro, potrai spendere le tue stelle in questo armadietto per sbloccare skin esclusive e potenziare le prestazioni di sparo della tua navicella!
+        </p>
+        
+        <div class="selector-box">
+            <div class="arrow-btn" onclick="prevSkin()"><</div>
+            
+            <div class="skin-display">
+                <div class="skin-visual">
+                    <img id="skinImg" src="img/navicella1.jpeg" alt="">
+                </div>
+                <div class="skin-info">
+                    <h2 id="skinName">MODELLO BASE</h2>
+                    <span id="skinRarity" class="rarity-tag" style="background: #fff; color: #000;">COMUNE</span>
+                    
+                    <span class="label-text">CARATTERISTICHE:</span>
+                    <p id="skinDesc" class="desc-text">La fidata compagna di ogni pasticcere spaziale. Bilanciata e affidabile.</p>
+                </div>
+            </div>
+
+            <div class="arrow-btn" onclick="nextSkin()">></div>
+            
+            <div id="counter" class="module-counter">1 / 3</div>
+        </div>
+
+        <div class="upgrades-section">
+            <h3 class="upgrades-title">- POTENZIAMENTI SPARO -</h3>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="upgrade-card">
+                        <img src="img/navicella.png" alt="Upgrade 1">
+                        <div class="upgrade-info">
+                            <h4>CREMA RAPIDA</h4>
+                            <p>Aumenta la cadenza di fuoco della navicella. Perfetto per le ondate più affollate.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="upgrade-card">
+                        <img src="img/navicella.png" alt="Upgrade 2">
+                        <div class="upgrade-info">
+                            <h4>RAGGIO TRIPLO</h4>
+                            <p>Spara tre proiettili di glassa a ventaglio. Copri un'area maggiore e devasta i nemici.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="sound/Max Gazzè - Sotto Casa (fixed frame video)_128k.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="audio-controls">
+            <button id="restartAudioBtn" class="audio-btn icon-only" onclick="restartAudio()" title="Ricomincia da capo">🔄</button>
+            <button id="audioToggleBtn" class="audio-btn" onclick="toggleAudio()">🔇 MUSIC: OFF</button>
+        </div>
+
+    </main>
+
+    <script>
+        const skins = [
+            {
+                name: "MODELLO BASE",
+                rarity: "COMUNE",
+                rarityColor: "#fff",
+                desc: "La fidata compagna di ogni pasticcere spaziale. Bilanciata e affidabile.",
+                img: "img/navicella1.png"
+            },
+            {
+                name: "STELLA FILANTE",
+                rarity: "RARO",
+                rarityColor: "#0055ff",
+                desc: "Una navicella leggera, con una velocità di movimento aumentata del 15%.",
+                img: "img/navicella2.jpeg" 
+            },
+            {
+                name: "TEMPERATRICE MK-II",
+                rarity: "EPICO",
+                rarityColor: "#8a2be2",
+                desc: "Scocca blindata e doppio raggio spara-crema. Solo per maestri cioccolatieri.",
+                img: "img/navicella3.jpeg"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateDisplay() {
+            const skin = skins[currentIndex];
+            document.getElementById('skinName').innerText = skin.name;
+            document.getElementById('skinRarity').innerText = skin.rarity;
+            document.getElementById('skinRarity').style.backgroundColor = skin.rarityColor;
+            document.getElementById('skinDesc').innerText = skin.desc;
+            document.getElementById('skinImg').src = skin.img;
+            document.getElementById('counter').innerText = `${currentIndex + 1} / ${skins.length}`;
+            
+            document.getElementById('skinRarity').style.color = (skin.rarity === "COMUNE") ? "#000" : "#fff";
+        }
+
+        function nextSkin() {
+            currentIndex = (currentIndex + 1) % skins.length;
+            updateDisplay();
+        }
+
+        function prevSkin() {
+            currentIndex = (currentIndex - 1 + skins.length) % skins.length;
+            updateDisplay();
+        }
+
+        updateDisplay();
+    </script>
+
+    <script>
+        var bgMusic = document.getElementById("bgMusic");
+        var audioBtn = document.getElementById("audioToggleBtn");
+        var isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+                audioBtn.innerHTML = "🔇 MUSIC: OFF";
+                audioBtn.classList.remove("playing");
+                sessionStorage.setItem("musicState", "paused");
+                sessionStorage.setItem("musicTime", bgMusic.currentTime); 
+            } else {
+                bgMusic.play();
+                audioBtn.innerHTML = "🔊 MUSIC: ON";
+                audioBtn.classList.add("playing");
+                sessionStorage.setItem("musicState", "playing");
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function restartAudio() {
+            bgMusic.currentTime = 0;
+            sessionStorage.setItem("musicTime", "0");
+            if (!isPlaying) {
+                toggleAudio(); 
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var savedState = sessionStorage.getItem("musicState");
+            var savedTime = sessionStorage.getItem("musicTime");
+
+            if (savedTime !== null) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            if (savedState === "playing") {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    audioBtn.innerHTML = "🔊 MUSIC: ON";
+                    audioBtn.classList.add("playing");
+                }).catch((error) => {
+                    console.log("Autoplay bloccato. È necessario un clic dell'utente.");
+                    isPlaying = false;
+                    sessionStorage.setItem("musicState", "paused");
+                });
+            }
+        });
+
+        window.addEventListener("beforeunload", function() {
+            sessionStorage.setItem("musicTime", bgMusic.currentTime);
+        });
+    </script>
+</body>
+</html>
